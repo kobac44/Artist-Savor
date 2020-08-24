@@ -1,12 +1,12 @@
 
-CREATE TABLE accounts(
-id INT AUTO_INCREMENT NOT NULL,
-Username VARCHAR(50) NOT NULL,
-firstName VARCHAR(50) NOT NULL,
-lastName VARCHAR(50) NOT NULL,
-bank_account INT,
-balance DECIMAL,
-transaction DECIMAL,
-createdAt TIMESTAMP NOT NULL,
-PRIMARY KEY (id),
-);
+-- CREATE TABLE accounts(
+-- id INT AUTO_INCREMENT NOT NULL,
+-- Username VARCHAR(50) NOT NULL,
+-- firstName VARCHAR(50) NOT NULL,
+-- lastName VARCHAR(50) NOT NULL,
+-- bank_account INT,
+-- balance DECIMAL,
+-- transaction DECIMAL,
+-- createdAt TIMESTAMP NOT NULL,
+-- PRIMARY KEY (id),
+-- );
