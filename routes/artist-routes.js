@@ -10,15 +10,18 @@ router.get('/new', (req, res) => res.render('new'));
 
 // Add a artist
 router.post('/new', (req, res) => {
-    let { email, artistName, address, artform, deposit } = req.body;
+    let { artistName, address, artform, deposit } = req.body;
     let errors = [];
 
     // Validate Fields
     if (!artistName) {
         errors.push({ text: 'make sure to add your name to join the artist-savor' });
     }
-    if (!account) {
-        errors.push({ text: 'please submit your artist acct number' });
+    if (!address) {
+        errors.push({ text: 'please submit your address' });
+    }
+    if (!artform) {
+        errors.push({ text: 'please submit your type of art or instrument' });
     }
     if (!deposit) {
         errors.push({ text: 'How much are you depositing today?' });
@@ -30,14 +33,17 @@ router.post('/new', (req, res) => {
         res.render('add', {
             errors,
             artistName,
-            account,
-            deposit
+            address,
+            artform,
+            deposit,
         });
+    }
+    else {
+        res.redirect("/members");
     }
 
 
-
-//     // add artist to table
+    // add artist to table
     Artist.create({
         artistName,
         account,
