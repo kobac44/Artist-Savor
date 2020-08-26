@@ -35,17 +35,17 @@ function objToSql(ob) {
 
 // Object Relational Mapping for all our SQL statement functions.
 let orm = {
-    //ORM select all query from burgers table
-    //   selectAll: (tableInput, cb) => {
-    //     let query = "SELECT * FROM " + tableInput + ";";
-    //     connection.query(query, (err, result) => {
-    //       if (err) {
-    //         throw err;
-    //       }
-    //       cb(result);
-    //     });
-    //   },
-    // ORM insert query for adding a burger
+    //ORM select one
+    selectOne: (tableInput, cb) => {
+        let query = "SELECT * FROM " + tableInput + ";";
+        connection.query(query, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
+    // ORM insert query for adding 
     insertOne: (table, cols, vals, cb) => {
         let query = "INSERT INTO " + table;
         query += " (";
@@ -62,7 +62,7 @@ let orm = {
             cb(result);
         });
     },
-    // update a burgers to devoured
+    // update 
     updateOne: (table, objColVals, condition, cb) => {
         let query = "UPDATE " + table;
         query += " SET ";
@@ -77,7 +77,7 @@ let orm = {
             cb(result);
         });
     },
-    // ORM delete a burger
+    // ORM delete 
     delete: function (table, condition, cb) {
         var queryString = "DELETE FROM " + table;
         queryString += " WHERE ";
