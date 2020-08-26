@@ -1,25 +1,43 @@
-// Import the ORM to create functions that will interact with the database
-const orm = require("../config/orm.js");
+module.exports = function (sequelize, DataTypes) {
 
-let Artists = {
-    selectOne: (cb) => {
-        orm.selectOne('Artists', (res) => cb(res));
 
-    },
-    // The variables cols and vals are arrays
-    insertOne: (cols, vals, cb) => {
-        orm.insertOne("Artists", cols, vals, (res) => cb(res));
 
-    },
-    updateOne: (objColVals, condition, cb) => {
-        orm.updateOne("Artists", objColVals, condition, (res) => cb(res));
-    },
-    delete: (condition, cb) => {
-        orm.delete("Artists", condition, (res) => {
-            cb(res);
+    let Artist = sequelize.define("Artist", {
+        artistName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+
+        artist_address: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        artform: DataTypes.TEXT,
+        account: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+
+        },
+        balance: DataTypes.DECIMAL,
+        deposit: DataTypes.DECIMAL,
+        withdrawl: DataTypes.DECIMAL,
+
+    });
+    Artist.associate = function (models) {
+        Artist.hasMany(models.Transaction, {
+            foreignKey: {
+                allowNull: false
+            }
         });
+
     }
+    return Artist;
 };
 
-// Export the database functions for the controller (burgerController.js)
-module.exports = Artists;
+
