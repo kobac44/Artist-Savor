@@ -1,9 +1,18 @@
-//dependencies for express and artist models 
-//controller routes the user expectation to database and view
+// dependencies for express and artist models
+// controller routes the user expectation to database and view
 const express = require("express");
 const router = express.Router();
 // Import the model (artists.js) to use its database functions.
-const artist = require("../models/artists.js");
+const artist = require("../models");
+
+
+// Dependencies
+// =============================================================
+
+// Requiring our models
+var db = require("../models");
+
+
 
 //requesting all objs from database to handlebars view
 router.get('/', (req, res) => {
@@ -15,19 +24,57 @@ router.get('/', (req, res) => {
         res.render("index", hdbrsObj);
     });
 });
+router.get('/search', (req, res) => {
+    let { itemSearched } = req.query;
+
+    artist.findOne({ where: { artistName: { itemSearched } } }).then(artist => res.render('account', { Artist })).catch(err => res.render('error', { error: err }));
+});
 //adding an artists posting it to the database 
+
 router.post('/api/artist', (req, res) => {
-    artist.create(
-        ['artistName', 'artist_address', 'artform', 'deposit'],
-        [req.body.artistName, req.body.artist_address, req.body.artform, req.body.deposit],
-        (result) => {
-            res.json({ id: result.insertId });
+    let { artistName, artist_address, artform, deposit } = req.body;
+    let errors = [];
+
+    // Validate Fields
+    if (!artistName) {
+        errors.push({ text: 'Please add your name' });
+    }
+    if (!artist_address) {
+        errors.push({ text: 'Please add your address' });
+    }
+    if (!artform) {
+        errors.push({ text: 'What is your talent' });
+    }
+    if (!deposit) {
+        errors.push({ text: 'Please add a contact email' });
+    }
+
+    // Check for errors
+    if (errors.length > 0) {
+        res.render('new', {
+            errors,
+            artistName, artist_address, artform, deposit
         });
+    } else {
+        if (!deposit) {
+            deposit = 0.00;
+        } else {
+            deposit = `$${deposit}`;
+        }
+
+
+
+        // Insert into table
+        artist.create({
+            artistName, artist_address, artform, deposit
+        })
+            .then(artist => res.redirect('/index'))
+            .catch(err => res.render('error', { error: err.message }))
+    }
 });
 
 
-
-//updating api Artist by id to Painter 
+//updating api Artist by id  
 router.put('/api/artist/:id', (req, res) => {
     let condition = "id = " + req.params.id;
     artist.update({ balance: req.body.deposit }, condition, (result) => {
