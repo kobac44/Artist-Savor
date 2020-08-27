@@ -5,8 +5,8 @@ $(function () {
         event.preventDefault();
 
         let newArtist = {
-            artistName: $('#newartist').val().trim(),
-            address: $('#address').val().trim(),
+            artistName: $('#artistName').val().trim(),
+            address: $('#artist_address').val().trim(),
             artform: $('#artform').val().trim(),
             deposit: $('#deposit').val().trim()
         };
