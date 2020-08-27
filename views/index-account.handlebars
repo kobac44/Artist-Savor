@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="jumbotron" id="jumbotron1">
+        <h1><strong>Artist Savor</strong>Sock away cash for a rainy day!</h1>
+        <img src="/public/img/money.jpg" alt="cash" width="120px" class="center">
+    </div>
+    <panel>
+        <form class="create-form">
+            <div class="form-group">
+                <label for="newArtist">Create a new account</label>
+                <input type="text" id="newArtist" name="newArtist">
+                <input type="text" id="address" name="address">
+                <input type="text" id="artForm" name="artForm">
+                <input type="number" id="deposit" name="deposit" min="45.00">
+
+                <button type="submit" class="btn btn-success" id="addedArtist">
+
+                </button> 
+            </div>
+        </form>
+    </panel>
+</div>
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>My Account</strong></div>
+        <div class="panel-body">
+            <ul>
+                {{#each artist}}
+                {{#if account}}
+                <li>
+                    <span><strong> {{this.id}} - {{this.artistName}}</strong></span>
+                    <span><strong> {{this.id}} - {{this.address}}</strong></span>
+                    <span><strong> {{this.id}} - {{this.artForm}}</strong></span>
+                    <span><strong> {{this.id}} - {{this.balance}}</strong></span>
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer id="sticky-footer" class="py-1 bg-secondary text-white-50">
+    <div 
+      class="container text-center"
+      style="font-family: 'Alegreya Sans SC', sans-serif;"
+    >
+      <small>&copy; Artist Savor - 2020</small>
+    </div>
+</footer>
+
+
+
+
