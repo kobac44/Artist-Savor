@@ -31,5 +31,10 @@ h2 {
   padding-left: 25px;
   position: center;
 }
-
+.container-fluid {
+  background-color: coral;
+  color: aliceblue;
+  border-color: black;
+  
+}
 
