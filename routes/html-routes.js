@@ -20,14 +20,17 @@ module.exports = function (app) {
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
-  app.set('/new', { layout: 'main' });
-  app.set('/search', { layout: 'main' });
-  // app.get('/new', (req, res) => {
-  //   res.render('new', layout, 'main');
-  // })
-  // app.get('/search', (req, res) => {
-  //   res.render('search', layout, 'main');
-  // })
+  // app.set('/new', { layout: 'main' });
+  // app.set('/search', { layout: 'main' });
+  app.get('/new', (req, res) => {
+    res.render('new');
+  });
+  app.get('/search', (req, res) => {
+    res.render('search');
+  });
+  app.get('/index', (req, res) => {
+    res.render('index');
+  });
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, (req, res) => {
