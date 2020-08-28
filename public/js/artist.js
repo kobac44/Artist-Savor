@@ -15,10 +15,24 @@ $(function () {
             data: newArtist
         }).then(() => {
 
-            window.location.replace("/members");
+            window.location.replace("/index");
         });
     });
+    $('.search-form').on('submit', function (event) {
+        event.preventDefault();
 
+        let artistId = {
+            id: $('#itemSearched').val().trim()
+
+        };
+        $.ajax('/api/artist', {
+            type: "GET",
+            data: artistId
+        }).then(() => {
+
+            window.location.replace("/display");
+        });
+    });
 
     // handle click event to delete a burger from view and database
     $(".delete-artist").on("click", function (event) {
@@ -29,7 +43,7 @@ $(function () {
             type: "DELETE"
         }).then(() => {
             // Reload the page to get the updated list
-            window.location.replace("/members");
+            window.location.replace("/display");
         }
         );
     });
