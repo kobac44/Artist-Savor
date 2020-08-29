@@ -1,5 +1,5 @@
-//const deleteExpenseBtn = $(".delete-Expense");
-//const deleteIncomeBtn = $(".delete-Income");
+const deleteExpBtn = $(".delete-Expense");
+const deleteInBtn = $(".delete-Income");
 
 
 $('#expenseBtn').on("click", function (event) {
@@ -24,10 +24,10 @@ $('#expenseBtn').on("click", function (event) {
     $('#cost-amount').val("");
 });
 
-$('artistBtn').on("click", function (event) {
+$('#artistBtn').on("click", function (event) {
     event.preventDefault();
 
-    if (!($('#incomeOrigin') && $('incomeType') && $('incomeAmount'))) {
+    if (!($('#incomeOrigin') && $('#incomeType') && $('#incomeAmount'))) {
 
         return;
     }
@@ -42,8 +42,8 @@ $('artistBtn').on("click", function (event) {
     submitIncome(income)
 
     $('#incomeOrigin').val("");
-    $('incomeType').val("");
-    $('incomeAmount').val("");
+    $('#incomeType').val("");
+    $('#incomeAmount').val("");
 });
 
 function submitExpense(Expense) {
@@ -58,22 +58,16 @@ function submitIncome(Income) {
     })
 };
 
-$(".delete-Expense").on('click', function (event) {
-    event.preventDefault();
-    const currentExpense = $(this).attr("data-expenseid");
+function handleExpenseDelete() {
+    var currentExpense = $(this).attr("data-expenseid")
     deleteExpense(currentExpense);
-
     window.location.reload();
-});
-
-
-
-$(".delete-Income").on("click", function (event) {
-    event.preventDefault();
-    const currentIncome = $(this).attr("data-incomeid")
+}
+function handleIncomeDelete() {
+    var currentIncome = $(this).attr("data-incomeid")
     deleteIncome(currentIncome);
     window.location.reload();
-});
+}
 
 function deleteExpense(id) {
     $.ajax({
@@ -94,8 +88,8 @@ function deleteIncome(id) {
 };
 
 
-//deleteExpenseBtn.on("click", handleExpenseDelete);
-//deleteIncomeBtn.on("click", handleIncomeDelete);
+deleteExpBtn.on("click", handleExpenseDelete);
+deleteInBtn.on("click", handleIncomeDelete);
 
 
 // CHART FOR THE NET DIFFERENCE
