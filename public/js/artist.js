@@ -1,5 +1,3 @@
-const deleteExpBtn = $(".delete-Expense");
-const deleteInBtn = $(".delete-Income");
 
 
 $('#expenseBtn').on("click", function (event) {
@@ -88,31 +86,31 @@ function deleteIncome(id) {
 };
 
 
-deleteExpBtn.on("click", handleExpenseDelete);
-deleteInBtn.on("click", handleIncomeDelete);
 
 
+
+//Association between tables query id = userid look at activity use here instead use one object
 // CHART FOR THE NET DIFFERENCE
-const ctx1 = $("#myChartNet");
-const netDataSet = [];
+
+let gotMoney = [];
 
 let getNetData = function () {
     $.get("/api/user_data").then(function (data) {
         email = data.email;
         $.get("/api/artists/total/" + email).then(function (datatwo) {
-            netDataSet.push(datatwo[0].tot_amt);
+            gotMoney.push(datatwo[0].tot_amt);
             // console.log(datatwo[0].tot_amt);
             $.get("/api/transactions/total/" + email).then(function (datathree) {
                 // console.log(datathree[0].tot_amt);
-                netDataSet.push(datathree[0].tot_amt);
-                // console.log(netDataSet)
-                new Chart(ctx1, {
+                gotMoney.push(datathree[0].tot_amt);
+                // console.log(gotMoney)
+                new Chart($("#myChartNet"), {
                     type: "horizontalBar",
                     data: {
                         labels: ["INCOME", "EXPENSES"],
                         datasets: [{
-                            data: [netDataSet[0], netDataSet[2]],
-                            data: netDataSet,
+                            data: [gotMoney[0], gotMoney[2]],
+                            data: gotMoney,
                             backgroundColor: [
                                 "rgba(75, 192, 192, 1)",
                                 "rgba(255,99,132,1)"],
@@ -135,7 +133,7 @@ let getNetData = function () {
                         }
                     }
                 });
-                $("#netDollars").text(netDataSet[0] - netDataSet[1]).toFixed(2);
+                $("#netDollars").text(gotMoney[0] - gotMoney[1]).toFixed(2);
             });
         });
     });

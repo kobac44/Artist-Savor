@@ -10,10 +10,6 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
 
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
 
 
         artistName: {
@@ -31,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-        artform: DataTypes.TEXT,
+
         origin: {
             type: DataTypes.TEXT,
             allowNull: false
@@ -44,25 +40,27 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        createdAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.fn("NOW"),
-            notNull: true
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        updatedAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.fn("NOW"),
-            notNull: true
-        }
+
+
 
     });
     Artists.associate = function (models) {
-        Artists.hasMany(models.Artists, {
+        Artists.hasMany(models.Transactions, {
             onDelete: "cascade"
         });
+    };
+    Artists.associate = function (models) {
+        Artists.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
 
-    }
-
+    };
     return Artists;
 };
 
