@@ -23,18 +23,23 @@ module.exports = function (app) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/display", isAuthenticated, (req, res) => {
+  app.get("/display", isAuthenticated, function (req, res) {
     db.Transactions.findAll({
       where: { email: req.user.email }
     }).then(function (dbTransaction) {
       db.Artists.findAll({
         where: { email: req.user.email }
       }).then(function (dbArtist) {
-        res.render('display', {
+        res.render("display", {
           expense: dbTransaction,
           income: dbArtist
         });
       })
     })
+  });
+
+  // Render 404 page for any unmatched routes
+  app.get("*", function (req, res) {
+    res.render("index");
   });
 };

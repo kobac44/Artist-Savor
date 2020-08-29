@@ -16,18 +16,18 @@
     </div>
     <!-- Row for buttons that will add expense or income -->
     <div class="row" id="addingButtons">
-        <button type="button" class="btn btn-success btn-lg" id="incomeButton" data-toggle="modal"
+        <button type="button" class="btn btn-success btn-lg" id="artistMoney" data-toggle="modal"
             data-target="#deposit"><i class="fas fa-plus"></i>
-            Deposit</button>
-        <button type="button" class="btn btn-danger btn-lg" id="expenseButton" data-toggle="modal"
+            Artist Savor </button>
+        <button type="button" class="btn btn-danger btn-lg" id="artistCost" data-toggle="modal"
             data-target="#withdrawl"><i class="fas fa-plus"></i>
-            Withdrawl or Cost</button>
+            Artist Withdrawl</button>
     </div>
     <br>
 
 
     <div class="row">
-        <!-- Div for the Income/Expense Pie Chart -->
+
         <div class="col-md-4">
             <canvas id="myChartNet" width="400" height="400"></canvas>
             <h3>Net = $<span id="netDollars"></span></h3>
@@ -42,14 +42,14 @@
             <h2>Artist Savor Deposits</h2>
         </div>
         <div class="card-body">
-            <table class<t="table table-striped" id="incomeTable">
-                head>
-                <tr>
-                    <th scope="col">Gig Origin</th>
-                    <th scope="col">Type of performance</th>
-                    <th scope="col">Deposit</th>
-                    <th scope="col"></th>
-                </tr>
+            <table class="table table-striped" id="incomeTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Gig Origin</th>
+                        <th scope="col">Type of performance</th>
+                        <th scope="col">Deposit</th>
+                        <th scope="col"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     <!-- Handlebars integration for income -->
@@ -105,7 +105,7 @@
 </div>
 
 <!-- Transactions modal -->
-<div class="modal" id="addExpense" tabindex="-1" role="dialog">
+<div class="modal" id="artistCost" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,7 +137,7 @@
 </div>
 
 <!-- Artist modal -->
-<div class="modal" id="addIncome" tabindex="-1" role="dialog">
+<div class="modal" id="artistMoney" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
