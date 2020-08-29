@@ -2,15 +2,15 @@
     <div id="home">
         <div class="jumbotron jumbotron-fluid col-md-12">
             <div class="container">
-                <div class="col-md-12">
-                    <h1 class="display-4">Artist Savor </h1>
-                    <p class="lead">Sock - Away for a rainy day!</p>
+                <div class="col-md-8">
+                    <h1 class="display-4">Artist Savor</h1>
+                    <p class="lead">Sock - Away for a rainy day</p>
                     <div style="text-align:center">
-                        <button type="button" class="btn btn-success" id="loginBtn" data-toggle="modal"
-                            data-target="#login"><i class="fas fa-user"></i>
+                        <button type="button" class="btn btn-info" id="loginButton" data-toggle="modal"
+                            data-target="#loginScreen"><i class="fas fa-user"></i>
                             Log-in</button>
-                        <button type="button" class="btn btn-success" id="newAcctBtn" data-toggle="modal"
-                            data-target="#account"><i class="fas fa-user-plus"></i>
+                        <button type="button" class="btn btn-info" id="createAccountButton" data-toggle="modal"
+                            data-target="#createAccount"><i class="fas fa-user-plus"></i>
                             Create Account</button>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Modal for Create Account -->
-<div class="modal" id="account" tabindex="-1" role="dialog">
+<div class="modal" id="createAccount" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,13 +32,13 @@
             <div class="modal-body">
                 <form class="signup">
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email-input" placeholder="someone@thing.com"
-                            required>
+                        <label for="exampleInputEmail1">Email Address</label>
+                        <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp"
+                            placeholder="Me@domain.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password-input" placeholder="password" required>
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="password-input" placeholder="Password" required>
                     </div>
                     <div style="display: none" id="alert" class="alert alert-danger" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -52,7 +52,7 @@
 </div>
 
 <!-- Modal for Log-in -->
-<div class="modal" id="login" tabindex="-1" role="dialog">
+<div class="modal" id="loginScreen" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,15 +65,15 @@
                 <form class="login">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email Address</label>
-                        <input type="email" class="form-control" id="emailLog-input" placeholder="someone@thing.com"
-                            required>
+                        <input type="email" class="form-control" id="emailLog-input" aria-describedby="emailHelp"
+                            placeholder="Me@domain.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="password2">Password</label>
+                        <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="passwordLog-input" placeholder="Password"
                             required>
                     </div>
-                    <button type="submit" class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn btn-info">Submit <i class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
         </div>

@@ -32,9 +32,9 @@ module.exports = function (app) {
     app.post("/api/create", function (req, res) {
         console.log(req.body);
         db.Artists.create({
-            artistName: req.body.artistName,
-            artist_address: req.body.artist_address,
+            origin: req.body.origin,
             type: req.body.type,
+            amount: req.body.amount,
             userID: req.body.userID
         }).then(function (dbArtists) {
             res.json(dbArtists);
