@@ -2,7 +2,20 @@ module.exports = function (sequelize, DataTypes) {
 
 
 
-    let Artist = sequelize.define("Artist", {
+    let Artists = sequelize.define("Artists", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
+
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+
         artistName: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,25 +32,38 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         artform: DataTypes.TEXT,
-        account: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-
+        origin: {
+            type: DataTypes.TEXT,
+            allowNull: false
         },
-        balance: DataTypes.DECIMAL,
-        deposit: DataTypes.DECIMAL,
-        withdrawl: DataTypes.DECIMAL,
+        type: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        amount: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.fn("NOW"),
+            notNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.fn("NOW"),
+            notNull: true
+        }
 
     });
-    Artist.associate = function (models) {
-        Artist.hasMany(models.Transaction, {
-            foreignKey: {
-                allowNull: false
-            }
+    Artists.associate = function (models) {
+        Artists.hasMany(models.Artists, {
+            onDelete: "cascade"
         });
 
     }
-    return Artist;
+
+    return Artists;
 };
 
 
