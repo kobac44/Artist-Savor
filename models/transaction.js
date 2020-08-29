@@ -21,26 +21,19 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        artform: DataTypes.TEXT,
+
 
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.fn("NOW"),
-            notNull: true
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.fn("NOW"),
-            notNull: true
         }
+
     });
     Transactions.associate = function (models) {
-        Transactions.hasMany(models.Transactions, {
-            onDelete: "cascade"
+        Transactions.belongsTo(models.Artists, {
+            foreignKey: {
+                allowNull: false
+            }
         });
 
     }
