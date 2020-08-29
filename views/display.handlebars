@@ -1,0 +1,175 @@
+<!-- Start of the Main Container -->
+<div class="container">
+    <!-- Jumbotron -->
+    <div class="jumbotron jumbotron-fluid col-md-12">
+        <div class="container">
+            <div class="col-md-7">
+                <h1 class="display-4">Artist Savor </h1>
+                <p class="lead">Sock - Away for a rainy day!</p>
+                <!-- Handlebars integration for the user name - which is an email address -->
+                <h3><strong>Welcome:</strong> <span class="member-name"></span></h3>
+                <br>
+                <a href="/logout"><button type="button" class="btn btn-info"><i class="fas fa-sign-out-alt"></i>
+                        Logout</button></a>
+            </div>
+        </div>
+    </div>
+    <!-- Row for buttons that will add expense or income -->
+    <div class="row" id="addingButtons">
+        <button type="button" class="btn btn-success btn-lg" id="incomeButton" data-toggle="modal"
+            data-target="#deposit"><i class="fas fa-plus"></i>
+            Deposit</button>
+        <button type="button" class="btn btn-danger btn-lg" id="expenseButton" data-toggle="modal"
+            data-target="#withdrawl"><i class="fas fa-plus"></i>
+            Withdrawl or Cost</button>
+    </div>
+    <br>
+
+
+    <div class="row">
+        <!-- Div for the Income/Expense Pie Chart -->
+        <div class="col-md-4">
+            <canvas id="myChartNet" width="400" height="400"></canvas>
+            <h3>Net = $<span id="netDollars"></span></h3>
+        </div>
+
+    </div>
+    <br>
+
+    <!-- Table for Artist -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Artist Savor Deposits</h2>
+        </div>
+        <div class="card-body">
+            <table class<t="table table-striped" id="incomeTable">
+                head>
+                <tr>
+                    <th scope="col">Gig Origin</th>
+                    <th scope="col">Type of performance</th>
+                    <th scope="col">Deposit</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <!-- Handlebars integration for income -->
+                    {{#each income}}
+                    <tr>
+                        <td> {{this.origin}} </td>
+                        <td> {{this.type}} </td>
+                        <td> {{this.amount}} </td>
+                        <td> <button type="button" data-incomeid="{{this.id}}"
+                                class="delete-Income btn btn-warning">Delete
+                                <i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <!-- Transactions table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Artist Savor Costs or Widthdrawls</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="expensesTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Origin of Cost</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Cost/Withdrawl</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Handlebars integration for Transactions -->
+                    {{#each expense}}
+                    <tr>
+                        <td> {{this.origin}} </td>
+                        <td> {{this.type}} </td>
+                        <td> {{this.amount}} </td>
+                        <td> <button type="button" data-expenseid="{{this.id}}"
+                                class="delete-Expense btn btn-warning">Delete
+                                <i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Transactions modal -->
+<div class="modal" id="addExpense" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Costs or Widthdrawls</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="expense">
+                    <div class="form-group">
+                        <label for="inputLabel">Performance Costs</label>
+                        <input class="form-control" id="costs" type="text" placeholder="The name of payee?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLabel">Type of costs</label>
+                        <input class="form-control" id="cost-type" type="text"
+                            placeholder="What was did you pay out for?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLabel">Withdrawl or Cost Amount</label>
+                        <input class="form-control" id="cost-amount" type="number" placeholder="150.00" required>
+                    </div>
+                    <button type="submit" class="btn btn-info" id="expenseBtn">Costs</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Artist modal -->
+<div class="modal" id="addIncome" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Gig Money</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="income">
+                    <div class="form-group">
+                        <label for="inputLabel">Performance</label>
+                        <input class="form-control" id="incomeOrigin" type="text" placeholder="What venue paid out?"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLabel">Type of Art Shown or Performed</label>
+                        <input class="form-control" id="incomeType" type="text"
+                            placeholder="How did you earn your gig money?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLabel">Amount Socked Away</label>
+                        <input class="form-control" id="incomeAmount" type="number" placeholder="150.00" required>
+                    </div>
+                    <button type="submit" class="btn btn-info" id="artistBtn">Savor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/artist.js"></script>

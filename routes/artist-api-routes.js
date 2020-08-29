@@ -1,61 +1,99 @@
-const express = require('express');
-const router = express.Router();
-const db = require("./models");
+var db = require("../models");
 
-
-// Add a artist
 module.exports = function (app) {
-    app.get('/api/artist', (req, res, next) => {
-        db.Artist.findAll({
-            include: [db.Transaction]
-        }).then(function (dbArtist) {
-            res.json(dbArtist);
-        });
-    });
-    app.post('/api/artist', function (req, res) {
-        db.Artist.create(req.body).then(function (dbArtist) {
-            res.json(dbArtist);
+    // ------------to find all(All the incomes with the same user)--------
+    app.get("/api/artists", function (req, res) {
+        db.Artists.findAll({}).then(function (dbArtists) {
+            res.json(dbArtists);
+            console.log(dbArtists);
         });
     });
 
-    app.get("/api/artist/:id", (req, res, next) => {
-        db.Artist.findOne({
-            where: { id: req.params.id },
-            include: [db.Transaction]
-        }).then(function (dbpassport_demo) {
-            res.json(dbpassport_demo);
-        });
-    });
-    app.get("/api/transaction/balance", (req, res, next) => {
-        db.Transaction.sum({
+    // -----API route for the Categorywise incomes-------
+    app.get("/api/artists/summary/:email", function (req, res) {
+        db.Artists.findAll({
+            attributes: ['type', [db.sequelize.fn('SUM', db.sequelize.col('amount')), 'tot_amt']],
             where: {
-                balance: req.params.balance
+                email: req.params.email
             },
-            include: [db.Artist]
-        }).then(function (dbpassport_demo) {
-            res.json(dbpassport_demo);
+            group: 'type'
+        }).then(function (sum) {
+            res.json(sum);
+            console.log(sum);
+        });
+
+    });
+
+
+
+    // -----POST route for new income source the same user-----
+
+
+    app.post("/api/create", function (req, res) {
+        console.log(req.body);
+        db.Artists.create({
+            artistName: req.body.artistName,
+            artist_address: req.body.artist_address,
+            type: req.body.type,
+            userID: req.body.userID
+        }).then(function (dbArtists) {
+            res.json(dbArtists);
         });
     });
-    app.put("/api/transaction", (req, res, next) => {
-        db.Transaction.update({
+
+    // --------DELETE route to Delete an income item by id
+    app.delete("/api/artists/:id", function (req, res) {
+        console.log(req.params.id);
+        db.Artists.destroy({
             where: {
-                balance: req.body.deposit
-            },
-        }).then(function (dbpassport_demo) {
-            res.json(dbpassport_demo);
-        });
-    });
-    //delete a artists from api id and removing from database and view
-    app.delete("/api/artist/:id", (req, res) => {
-        let condition = "id = " + req.params.id;
-        artist.delete(condition, (result) => {
-            if (result.affectedRows == 0) {
-                // If no rows were changed, then the ID must not exist, so 404
-                return res.status(404).end();
-            } else {
-                res.status(200).end();
+                id: req.params.id
             }
+        }).then(function (dbArtists) {
+            res.json(dbArtists);
         });
     });
 
-};
+    app.post("/api/artists/", function (req, res) {
+        db.Artists.create({
+            origin: req.body.origin,
+            type: req.body.type,
+            amount: req.body.amount,
+            email: req.body.email
+        }).then(function (dbArtists) {
+            res.json(dbArtists);
+        });
+    });
+
+    app.get("/api/artists/:id", function (req, res) {
+        db.Artists.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (dbArtists) {
+            res.json(dbArtists);
+        });
+    });
+
+    app.get("/api/artists/total/:email", function (req, res) {
+        db.Artists.findAll({
+            attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'tot_amt']],
+            where: {
+                email: req.params.email
+            }
+        }).then(function (sum) {
+            res.json(sum);
+            console.log(sum);
+        });
+    });
+    app.get("/api/artists/detail/:email", function (req, res) {
+        db.Artists.findAll({
+            where: {
+                email: req.params.email
+            }
+        }).then(function (dbArtists) {
+            res.json(dbArtists);
+            console.log(dbArtists);
+        });
+    });
+
+}; 

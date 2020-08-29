@@ -1,50 +1,151 @@
-// ready function for js file
-$(function () {
+//const deleteExpenseBtn = $(".delete-Expense");
+//const deleteIncomeBtn = $(".delete-Income");
 
-    $('.create-form').on('submit', function (event) {
-        event.preventDefault();
 
-        let newArtist = {
-            artistName: $('#artistName').val().trim(),
-            address: $('#artist_address').val().trim(),
-            artform: $('#artform').val().trim(),
-            deposit: $('#deposit').val().trim()
-        };
-        $.ajax('/api/artist', {
-            type: "POST",
-            data: newArtist
-        }).then(() => {
+$('#expenseBtn').on("click", function (event) {
+    event.preventDefault();
 
-            window.location.replace("/index");
-        });
-    });
-    $('.search-form').on('submit', function (event) {
-        event.preventDefault();
+    if (!($("#costs") && $('#cost-type') && $('#cost-amount'))) {
 
-        let artistId = {
-            id: $('#itemSearched').val().trim()
+        return;
+    }
 
-        };
-        $.ajax('/api/artist', {
-            type: "GET",
-            data: artistId
-        }).then(() => {
+    expense = {
+        origin: $("#costs").val().trim(),
+        type: $('#cost-type').val().trim(),
+        amount: $('#cost-amount').val().trim(),
+        email: $(".member-name").text()
+    };
 
-            window.location.replace("/display");
-        });
-    });
+    submitExpense(expense)
 
-    // handle click event to delete a burger from view and database
-    $(".delete-artist").on("click", function (event) {
-        event.preventDefault();
-        var id = $(this).data("id");
-        // Send the DELETE request.
-        $.ajax("/api/artists/" + id, {
-            type: "DELETE"
-        }).then(() => {
-            // Reload the page to get the updated list
-            window.location.replace("/display");
-        }
-        );
-    });
+    $("#costs").val("");
+    $('#cost-type').val("");
+    $('#cost-amount').val("");
 });
+
+$('artistBtn').on("click", function (event) {
+    event.preventDefault();
+
+    if (!($('#incomeOrigin') && $('incomeType') && $('incomeAmount'))) {
+
+        return;
+    }
+
+    const income = {
+        origin: $('#incomeOrigin').val().trim(),
+        type: $('incomeType').val().trim(),
+        amount: $('incomeAmount').val().trim(),
+        email: $(".member-name").text()
+    };
+
+    submitIncome(income)
+
+    $('#incomeOrigin').val("");
+    $('incomeType').val("");
+    $('incomeAmount').val("");
+});
+
+function submitExpense(Expense) {
+    $.post("/api/transactions/", Expense, function () {
+        window.location.reload();
+    })
+};
+
+function submitIncome(Income) {
+    $.post("/api/artists/", Income, function () {
+        window.location.reload();
+    })
+};
+
+$(".delete-Expense").on('click', function (event) {
+    event.preventDefault();
+    const currentExpense = $(this).attr("data-expenseid");
+    deleteExpense(currentExpense);
+
+    window.location.reload();
+});
+
+
+
+$(".delete-Income").on("click", function (event) {
+    event.preventDefault();
+    const currentIncome = $(this).attr("data-incomeid")
+    deleteIncome(currentIncome);
+    window.location.reload();
+});
+
+function deleteExpense(id) {
+    $.ajax({
+        method: "DELETE",
+        url: "/api/transactions/" + id
+    })
+        .then(function () {
+        });
+};
+
+function deleteIncome(id) {
+    $.ajax({
+        method: "DELETE",
+        url: "/api/artists/" + id
+    })
+        .then(function () {
+        });
+};
+
+
+//deleteExpenseBtn.on("click", handleExpenseDelete);
+//deleteIncomeBtn.on("click", handleIncomeDelete);
+
+
+// CHART FOR THE NET DIFFERENCE
+const ctx1 = $("#myChartNet");
+const netDataSet = [];
+
+let getNetData = function () {
+    $.get("/api/user_data").then(function (data) {
+        email = data.email;
+        $.get("/api/artists/total/" + email).then(function (datatwo) {
+            netDataSet.push(datatwo[0].tot_amt);
+            // console.log(datatwo[0].tot_amt);
+            $.get("/api/transactions/total/" + email).then(function (datathree) {
+                // console.log(datathree[0].tot_amt);
+                netDataSet.push(datathree[0].tot_amt);
+                // console.log(netDataSet)
+                new Chart(ctx1, {
+                    type: "horizontalBar",
+                    data: {
+                        labels: ["INCOME", "EXPENSES"],
+                        datasets: [{
+                            data: [netDataSet[0], netDataSet[2]],
+                            data: netDataSet,
+                            backgroundColor: [
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(255,99,132,1)"],
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false,
+                        },
+                        title: {
+                            display: true,
+                            text: 'Expenses vs. Income'
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                $("#netDollars").text(netDataSet[0] - netDataSet[1]).toFixed(2);
+            });
+        });
+    });
+};
+
+getNetData();
+

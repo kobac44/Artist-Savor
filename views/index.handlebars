@@ -1,47 +1,85 @@
 <div class="container">
-    <div class="jumbotron" id="jumbotron1">
-        <h1><strong>Artist Savor</strong>Sock away cash for a rainy day!</h1>
-        <img src="/public/img/money.jpg" alt="cash" width="120px" class="center">
-    </div>
-    <panel>
-        <form class="create-form">
-            <div class="form-group">
-                <label for="newArtist">Create a new account</label>
-                <input type="text" id="newArtist" name="newArtist">
-                <input type="text" id="address" name="address">
-                <input type="text" id="artForm" name="artForm">
-                <input type="number" id="deposit" name="deposit" min="45.00">
-
-                <button type="submit" class="btn btn-success" id="addedArtist">
-
-                </button>
+    <div id="home">
+        <div class="jumbotron jumbotron-fluid col-md-12">
+            <div class="container">
+                <div class="col-md-12">
+                    <h1 class="display-4">Artist Savor </h1>
+                    <p class="lead">Sock - Away for a rainy day!</p>
+                    <div style="text-align:center">
+                        <button type="button" class="btn btn-success" id="loginBtn" data-toggle="modal"
+                            data-target="#login"><i class="fas fa-user"></i>
+                            Log-in</button>
+                        <button type="button" class="btn btn-success" id="newAcctBtn" data-toggle="modal"
+                            data-target="#account"><i class="fas fa-user-plus"></i>
+                            Create Account</button>
+                    </div>
+                </div>
             </div>
-        </form>
-    </panel>
-</div>
-
-<div class="col-sm-12">
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong>My Account</strong></div>
-        <div class="panel-body">
-            <ul>
-                {{#each artist}}
-                {{#if account}}
-                <li>
-                    <span><strong> {{this.id}} - {{this.artistName}}</strong></span>
-                    <span><strong> {{this.id}} - {{this.address}}</strong></span>
-                    <span><strong> {{this.id}} - {{this.artForm}}</strong></span>
-                    <span><strong> {{this.id}} - {{this.balance}}</strong></span>
-                </li>
-                {{/if}}
-                {{/each}}
-            </ul>
         </div>
     </div>
 </div>
 
-<footer id="sticky-footer" class="py-1 bg-secondary text-white-50">
-    <div class="container text-center" style="font-family: 'Alegreya Sans SC', sans-serif;">
-        <small>&copy; Artist Savor - 2020</small>
+<!-- Modal for Create Account -->
+<div class="modal" id="account" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="signup">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email-input" placeholder="someone@thing.com"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password-input" placeholder="password" required>
+                    </div>
+                    <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span> <span class="msg"></span>
+                    </div>
+                    <button type="submit" class="btn btn-info">Submit <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
     </div>
-</footer>
+</div>
+
+<!-- Modal for Log-in -->
+<div class="modal" id="login" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Log-in</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="login">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email Address</label>
+                        <input type="email" class="form-control" id="emailLog-input" placeholder="someone@thing.com"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Password</label>
+                        <input type="password" class="form-control" id="passwordLog-input" placeholder="Password"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/artist.js"></script>
