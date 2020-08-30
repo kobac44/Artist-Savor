@@ -27,10 +27,12 @@ $(document).ready(() => {
     $.post("/api/signup", {
       email: email,
       password: password
-    }).then(function (data) {
-      window.location.replace(data);
-      // If there's an error, handle it by throwing up a boostrap alert
-    }).catch(handleLoginErr);
+    })
+      .then(() => {
+        window.location.replace("/members");
+        // If there's an error, handle it by throwing up a bootstrap alert
+      })
+      .catch(handleLoginErr);
   }
 
   function handleLoginErr(err) {
