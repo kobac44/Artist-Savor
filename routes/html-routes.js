@@ -10,35 +10,37 @@ module.exports = function (app) {
   app.get("/", (req, res) => {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.render("display");
+      res.redirect("/members");
     }
-    res.redirect("/signup");
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+
+  });
+
+  app.get("/signup", (req, res) => {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+
   });
 
   app.get("/login", (req, res) => {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.render("display");
+      res.redirect("/members");
     }
-    res.redirect("/signup");
-  });
-  app.get("/signup", (req, res) => {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.render("index");//to add information to artists form
-    }
-    res.redirect("/signup");
+    res.sendFile(path.join(__dirname, "../public/login.html"));
+
   });
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, (req, res) => {
-    db.Artists.findOne({
+    db.Artist.findAll({
       include: [db.User],
-      Userid: user.id,
-
     }).then((data) => {
       res.render("display", {
-        artists: data,
+        artist: data,
       });
     });
   });

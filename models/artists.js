@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
 
 
 
-    let Artists = sequelize.define("Artists", {
+    let Artist = sequelize.define("Artist", {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -52,15 +52,15 @@ module.exports = function (sequelize, DataTypes) {
 
     });
 
-    Artists.associate = function (models) {
-        Artists.belongsTo(models.User, {
+    Artist.associate = function (models) {
+        Artist.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
 
     };
-    return Artists;
+    return Artist;
 };
 
 
