@@ -29,6 +29,7 @@ $(document).ready(() => {
       password: password
     }).then(function (data) {
       window.location.replace(data);
+      res.redirect("/");
       // If there's an error, log the error
     }).catch(function (err) {
       console.log(err);
