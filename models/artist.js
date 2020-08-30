@@ -12,14 +12,20 @@ module.exports = function (sequelize, DataTypes) {
 
 
 
-        artistName: {
+        first: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
             }
         },
-
+        last: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
         artist_address: {
             type: DataTypes.TEXT,
             allowNull: false,
@@ -27,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-
+        artform: DataTypes.TEXT,
         origin: {
             type: DataTypes.TEXT,
             allowNull: false
@@ -40,19 +46,12 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+
 
 
 
     });
-    Artists.associate = function (models) {
-        Artists.hasMany(models.Transactions, {
-            onDelete: "cascade"
-        });
-    };
+
     Artists.associate = function (models) {
         Artists.belongsTo(models.User, {
             foreignKey: {
