@@ -1,81 +1,89 @@
 <div class="container">
     <div>
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid col-md-12">
             <div class="container">
-                <div class="col">
+                <div class="col-md-12">
                     <h1>Artist Savor</h1>
                     <p>Sock - Away for a rainy day</p>
-                    <div style="text-align:center">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginIn"><i
-                                class="fas fa-user"></i>
-                            Log-in</button>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#signUpMod"><i
-                                class="fas fa-user-plus"></i>
-                            Create Account</button>
+                    <div class="row" id="gigMoneyBtns">
+                        <button type="button" class="btn btn-success btn-lg" id="gigMoneyIn" data-toggle="modal"
+                            data-target="#gigInput"><i class="fa fa-money" aria-hidden="true"></i>Artist Savor</button>
+                        <button type="button" class="btn btn-warning btn-lg" id="gigMoneyOut" data-toggle="modal"
+                            data-target="#gigOutput"><i class="fa fa-credit-card" aria-hidden="true"></i>Artist
+                            Cost</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal for Create Account -->
-<div class="modal" id="signUpMod" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+{{!-- artist input money modal --}}
+<div class="modal" id="gigInput" tabindex="-1" role="dialog" aria-labelledby="gigInput" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Account</h5>
+                <h5 class="modal-title modalh5">Artist Savor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="signup">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email Address</label>
-                        <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp"
-                            placeholder="Me@domain.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="password-input" placeholder="Password" required>
-                    </div>
-                    <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only">Error:</span> <span class="msg"></span>
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit <i class="fas fa-arrow-right"></i></button>
-                </form>
+                <div class="modal-body">
+                    <form id="savorForm">
+                        <div class="form-group">
+                            <label for="inputLabel">Performance</label>
+                            <input class="form-control" id="originMoney" type="text" aria-labelledby="gigInput"
+                                placeholder="What venue paid you?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLabel">Type of Art Shown or Performed</label>
+                            <input class="form-control" id="artType" type="text"
+                                placeholder="How did you earn your gig money?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLabel">Amount Socked Away</label>
+                            <input class="form-control" id="artAmount" type="number" placeholder="150.00" required>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="artistBtn">Arist Savor</button>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
-
-<!-- Modal for Log-in -->
-<div class="modal" id="loginIn" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+{{!-- artist cost modal --}}
+<div class="modal" id="gigOutput" tabindex="-1" role="dialog" aria-labelledby="gigOutput" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Log-in</h5>
+                <h5 class="modal-title modalh5">Artist Cost</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="login">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email Address</label>
-                        <input type="email" class="form-control" id="emailLog-input" aria-describedby="emailHelp"
-                            placeholder="Me@domain.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="passwordLog-input" placeholder="Password"
-                            required>
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit <i class="fas fa-arrow-right"></i></button>
-                </form>
+                <div class="modal-body">
+                    <form id="savorForm">
+                        <div class="form-group">
+                            <label for="inputLabel">Artist Expense</label>
+                            <input class="form-control" id="originMoney" type="text" aria-labelledby="gigOutput"
+                                placeholder="What is the name of the place you paid out?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLabel">What Did You Pay For?</label>
+                            <input class="form-control" id="artType" type="text" placeholder="What did you pay for?"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLabel">Artist Cost</label>
+                            <input class="form-control" id="artAmount" type="number" placeholder="150.00" required>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="artistBtn">Arist Savor</button>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
