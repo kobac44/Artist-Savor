@@ -39,7 +39,7 @@ module.exports = function (app) {
     db.Artist.findAll({
       include: [db.User],
     }).then((data) => {
-      res.render("display", {
+      res.render("index", {
         artist: data,
       });
     });
