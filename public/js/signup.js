@@ -3,22 +3,27 @@ $(document).ready(() => {
   const signUpForm = $("form.signup");
   const emailInput = $("input#email-input");
   const passwordInput = $("input#password-input");
-
+  const addressInput = $("input#address-input");
+  const artformInput = $("input#artform-input");
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", event => {
     event.preventDefault();
     const userData = {
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      artist_address: addressInput.val().trim(),
+      artform: artformInput.val().trim()
     };
 
-    if (!userData.email || !userData.password) {
+    if (!userData.email || !userData.password || !userData.artist_address || !userData.artform) {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.email, userData.password);
+    signUpUser(userData.email, userData.password, userData.artist_address, userData.artform);
     emailInput.val("");
     passwordInput.val("");
+    addressInput.val("");
+    artformInput.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
@@ -32,7 +37,8 @@ $(document).ready(() => {
 
     })
       .then(() => {
-        window.location.replace("/members");
+
+        window.location.replace("/login");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

@@ -11,8 +11,8 @@ let data = {
             hoverBorderColor: "rgba(52, 235, 155, 1)",
             data: [
                 {
-                    artist: artist.amount,
-                    artist: artist.cost
+                    // data: pay.amount,
+                    // data: cost.cost
 
                 }
             ],

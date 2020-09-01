@@ -21,7 +21,10 @@ module.exports = function (app) {
   app.post("/api/signup", (req, res) => {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      artist_address: req.body.artist_address,
+      artform: req.body.artform,
+
 
     })
       .then(() => {
@@ -32,15 +35,7 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/api/artists", (req, res) => {
-    db.Artists.create({
-      UserId: req.body.userId,
-      first: req.body.first,
-      last: req.body.last,
-      artist_address: req.body.artist_address,
-      artform: req.body.artform
-    }).then(response => res.json(response))
-  });
+
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
@@ -48,11 +43,12 @@ module.exports = function (app) {
     res.redirect("/");
   });
 
-  //get all punchse
-  app.get("/api/artists/:id", (req, res) => {
+  //get all 
+  app.get("/api/user/:id", (req, res) => {
     db.User.findAll({
       include: {
-        model: db.Artist,
+        model: db.Pay,
+        model: db.Cost,
         where: {
           userId: req.params.id
         }
@@ -70,53 +66,78 @@ module.exports = function (app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        artist_address: req.user.artist_address,
+        artform: req.user.artform,
+        id: req.user.id,
       });
     }
   });
-  app.get("/api/artists/total/:email", function (req, res) {
-    db.Artists.findAll({
-      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'tot_amt']],
+
+  // app.get("/api/pays/total/:userId", function (req, res) {
+  //   db.User.findAll({
+  //     include: [Pay.db],
+  //     attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'tot_amt']],
+  //     where: {
+  //       userId: req.params.userId
+  //     }
+  //   }).then(function (sum) {
+  //     res.json(sum);
+  //     console.log(sum);
+  //   });
+  // });
+  // app.get("/api/costs/total/:userId", function (req, res) {
+  //   db.User.findAll({
+  //     include: [Cost.db],
+  //     attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'tot_cost']],
+  //     where: {
+  //       userId: req.params.userId
+  //     }
+  //   }).then(function (sum) {
+  //     res.json(sum);
+  //     console.log(sum);
+  //   });
+  // });
+  app.get("/api/user/:UserId", function (req, res) {
+    db.User.findAll({
       where: {
-        email: req.params.email
+        UserId: req.params.userId
       }
-    }).then(function (sum) {
-      res.json(sum);
-      console.log(sum);
-    });
-  });
-  app.get("/api/artists/detail/:email", function (req, res) {
-    db.Artists.findAll({
-      where: {
-        email: req.params.email
-      }
-    }).then(function (dbArtists) {
-      res.json(dbArtists);
-      console.log(dbArtists);
+    }).then(function (db) {
+      res.json(db);
+      console.log(db);
     });
   });
   //add amount income
-  app.post("/api/create", function (req, res) {
-    console.log(req.body);
-    db.Artists.create({
+  app.post("/api/pays/", function (req, res) {
+    db.Pay.create({
       origin: req.body.origin,
       type: req.body.type,
       amount: req.body.amount,
-      userID: req.body.userID
-    }).then(function (dbArtists) {
-      res.json(dbArtists);
+      UserId: req.body.UserId
+    }).then(function (dbPay) {
+      res.json(dbPay);
     });
   });
-
+  app.post("/api/costs/", function (req, res) {
+    db.Cost.create({
+      origin: req.body.origin,
+      type: req.body.type,
+      cost: req.body.cost,
+      UserId: req.body.UserId
+    }).then(function (dbCost) {
+      res.json(dbCost);
+    });
+  });
   // delete income by id
-  app.delete("/api/artists/:id", function (req, res) {
-    console.log(req.params.id);
-    db.Artists.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (dbArtists) {
-      res.json(dbArtists);
-    });
-  });
+  // app.delete("/api/cost/:id", function (req, res) {
+  //   console.log(req.params.id);
+  //   db.User.destroy({
+  //     include: [Cost.db],
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function (db) {
+  //     res.json(db);
+  //   });
+  // });
 };
