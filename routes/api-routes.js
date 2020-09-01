@@ -86,18 +86,18 @@ module.exports = function (app) {
     });
   });
 
-  // app.get("/api/costs/total/:userId", function (req, res) {
-  //   db.User.findAll({
-  //     include: [Cost.db],
-  //     attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'tot_cost']],
-  //     where: {
-  //       userId: req.params.userId
-  //     }
-  //   }).then(function (sum) {
-  //     res.json(sum);
-  //     console.log(sum);
-  //   });
-  // });
+  app.get("/api/costs/total/:userId", function (req, res) {
+    db.User.findAll({
+      include: [Cost.db],
+      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'total']],
+      where: {
+        userId: req.params.userId
+      }
+    }).then(function (sum) {
+      res.json(sum);
+      console.log(sum);
+    });
+  });
   app.get("/api/user/:UserId", function (req, res) {
     db.User.findAll({
       where: {
