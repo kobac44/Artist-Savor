@@ -44,7 +44,7 @@ module.exports = function (app) {
   });
 
   //get all 
-  app.get("/api/user/:id", (req, res) => {
+  app.get("/api/user_data/:id", (req, res) => {
     db.User.findAll({
       include: {
         model: db.Pay,
@@ -55,7 +55,16 @@ module.exports = function (app) {
       }
     }).then(response => res.json(response))
   });
-
+  // app.get("/api/user_data", (req, res) => {
+  //   User.findAll((data) => {
+  //     let hdbrsObj = {
+  //       user: data,
+  //       pay: data,
+  //       cost: data
+  //     };
+  //     res.render("index", hdbrsObj);
+  //   });
+  // });
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
@@ -72,30 +81,41 @@ module.exports = function (app) {
       });
     }
   });
-
+  app.get("/api/pay", function (req, res) {
+    db.Pay.findAll({}).then(function (dbPay) {
+      res.json(dbPay);
+      console.log("see this api hit pay", dbPay);
+    });
+  });
+  app.get("/api/cost", function (req, res) {
+    db.Cost.findAll({}).then(function (dbCost) {
+      res.json(dbCost);
+      console.log("see this api hit Cost", dbCost);
+    });
+  });
   app.get("/api/pays/total/:UserId", function (req, res) {
     db.User.findAll({
       include: [Pay.db],
-      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'total']],
+      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'amount_total']],
       where: {
         UserId: req.params.UserId
       }
     }).then(function (sum) {
       res.json(sum);
-      console.log(sum);
+      console.log("this is the amount sum silly", sum);
     });
   });
 
-  app.get("/api/costs/total/:userId", function (req, res) {
+  app.get("/api/costs/total/:UserId", function (req, res) {
     db.User.findAll({
       include: [Cost.db],
-      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'total']],
+      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'cost_total']],
       where: {
-        userId: req.params.userId
+        userId: req.params.UserId
       }
     }).then(function (sum) {
       res.json(sum);
-      console.log(sum);
+      console.log('this is cost sum', sum);
     });
   });
   app.get("/api/user/:UserId", function (req, res) {
@@ -130,15 +150,26 @@ module.exports = function (app) {
     });
   });
   // delete income by id
-  // app.delete("/api/cost/:id", function (req, res) {
-  //   console.log(req.params.id);
-  //   db.User.destroy({
-  //     include: [Cost.db],
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function (db) {
-  //     res.json(db);
-  //   });
-  // });
+  app.delete("/api/cost/:id", function (req, res) {
+    console.log(req.params.id);
+    db.User.destroy({
+      include: [Cost.db],
+      where: {
+        id: req.params.id
+      }
+    }).then(function (db) {
+      res.json(db);
+    });
+  });
+  app.delete("/api/pay/:id", function (req, res) {
+    console.log(req.params.id);
+    db.User.destroy({
+      include: [Pay.db],
+      where: {
+        id: req.params.id
+      }
+    }).then(function (db) {
+      res.json(db);
+    });
+  });
 };
