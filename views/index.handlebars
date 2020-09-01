@@ -5,9 +5,15 @@
                 <div class="col-md-12">
                     <h1>Artist Savor</h1>
                     <p>Sock - Away for a rainy day</p>
+
+                    <h2>Welcome <span class="member-name"></span></h2>
+                    <h3>Account Address: <span class="artist-address"></span></h3>
+                    <h4>Type of Art Form: <span class="art-form"></span></h4>
+                    <h5>User Account ID: <span class="user-id"></span></h5>
                     <div class="row" id="gigMoneyBtns">
                         <button type="button" class="btn btn-success btn-lg" id="gigMoneyIn" data-toggle="modal"
-                            data-target="#gigInput"><i class="fa fa-money" aria-hidden="true"></i>Artist Savor</button>
+                            data-target="#gigInput"><i class="far fa-dollar-sign" aria-hidden="true"></i>Artist
+                            Savor</button>
                         <button type="button" class="btn btn-warning btn-lg" id="gigMoneyOut" data-toggle="modal"
                             data-target="#gigOutput"><i class="fa fa-credit-card" aria-hidden="true"></i>Artist
                             Cost</button>
@@ -44,7 +50,7 @@
                             <label for="inputLabel">Amount Socked Away</label>
                             <input class="form-control" id="artAmount" type="number" placeholder="150.00" required>
                         </div>
-                        <button type="submit" class="btn btn-success" id="artistBtn">Arist Savor</button>
+                        <button type="submit" class="btn btn-success" id="payBtn">Arist Savor</button>
                     </form>
                 </div>
             </div>
@@ -67,19 +73,19 @@
                     <form id="savorForm">
                         <div class="form-group">
                             <label for="inputLabel">Artist Expense</label>
-                            <input class="form-control" id="originMoney" type="text" aria-labelledby="gigOutput"
+                            <input class="form-control" id="originCost" type="text" aria-labelledby="gigOutput"
                                 placeholder="What is the name of the place you paid out?" required>
                         </div>
                         <div class="form-group">
                             <label for="inputLabel">What Did You Pay For?</label>
-                            <input class="form-control" id="artType" type="text" placeholder="What did you pay for?"
+                            <input class="form-control" id="costType" type="text" placeholder="What did you pay for?"
                                 required>
                         </div>
                         <div class="form-group">
                             <label for="inputLabel">Artist Cost</label>
-                            <input class="form-control" id="artAmount" type="number" placeholder="150.00" required>
+                            <input class="form-control" id="artCost" type="number" placeholder="150.00" required>
                         </div>
-                        <button type="submit" class="btn btn-success" id="artistBtn">Arist Cost</button>
+                        <button type="submit" class="btn btn-warning" id="costBtn">Arist Cost</button>
                     </form>
                 </div>
             </div>
@@ -90,5 +96,5 @@
 
 <canvas id="artistChart" width="400" height="200"></canvas>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/artist.js"></script>
+{{!-- <script src="/js/artist.js"></script> --}}
 <script src="/js/members.js"></script>

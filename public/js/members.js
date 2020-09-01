@@ -2,15 +2,84 @@ $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
   let userId;
-  console.log('userid', userId);
+  let artForms;
   $.get("/api/user_data").then(data => {
-
-    $(".member-name").text(data.email);
     userId = data.id;
-  });
-  $.get('/api/user_data').then(data => {
+    artForms = data.artform;
+    $(".member-name").text(data.email);
+    $(".artist-address").text(data.artist_address);
+    $(".art-form").text(artForms);
+    $(".user-id").text(userId);
 
-  })
+    console.log('artform nuckleheadds', artForms);
+  });
+  let UserId = $(".user-id");
+  // id="originMoney"
+  let originMoney = $("input#originMoney");
+  // id="artType"
+  let artType = $("input#artType");
+  // id="artAmount"
+  let artAmount = $("input#artAmount");
+  let payBtn = $("#payBtn");
+
+  payBtn.on("click", PaySubmit);
+  function PaySubmit(event) {
+    event.preventDefault();
+
+    let gigPay = {
+
+      origin: originMoney.val().trim(),
+      type: artType.val().trim(),
+      amount: artAmount.val().trim(),
+      UserId: UserId.text()
+    };
+    sendPay(gigPay);
+
+    console.log('show gig pay', gigPay);
+    originMoney.val('');
+    artType.val('');
+    artAmount.val('');
+  };
+  function sendPay(Pay) {
+    $.post('/api/pays', Pay, function () {
+      window.location.reload();
+
+    });
+  };
+
+  let UserId2 = $(".user-id");
+  // id="originCost"
+  let originCost = $("input#originCost");
+  // id="costType"
+  let costType = $("input#costType");
+  // id="artCost"
+  let artCost = $("input#artCost");
+  let costBtn = $("#costBtn");
+
+  costBtn.on("click", CostSubmit);
+  function CostSubmit(event) {
+    event.preventDefault();
+
+    let gigCost = {
+
+      origin: originCost.val().trim(),
+      type: costType.val().trim(),
+      cost: artCost.val().trim(),
+      UserId: UserId2.text()
+    };
+    sendCost(gigCost);
+
+    console.log('show gig pay', gigCost);
+    originCost.val('');
+    costType.val('');
+    artCost.val('');
+  };
+  function sendCost(Cost) {
+    $.post('/api/costs', Cost, function () {
+      window.location.reload();
+
+    });
+  };
 
 
 });
