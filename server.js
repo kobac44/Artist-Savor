@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
 const db = require("./models");
-
+//const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 // Creating express app and configuring middleware needed for authentication
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -30,6 +30,7 @@ const exphbs = require("express-handlebars");
 //handlebars required setup engine and default layout
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+// When connecting Handlebars to the Express app...
 
 
 
