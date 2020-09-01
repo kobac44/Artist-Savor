@@ -28,3 +28,19 @@ let artistChart = Chart.Bar(canvas, {
     data: data,
     options: option
 });
+
+
+var ctx = document.getElementById("pieChart").getContext('2d');
+var pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Green", "Blue"],
+        datasets: [{
+            backgroundColor: [
+                "#2ecc71",
+                "#3498db"
+            ],
+            data: [12, 19]
+        }]
+    }
+});
