@@ -1,8 +1,10 @@
 $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
+
   let userId;
   let artForms;
+
   $.get("/api/user_data").then(data => {
     userId = data.id;
     artForms = data.artform;
@@ -13,6 +15,8 @@ $(document).ready(() => {
 
 
   });
+
+
   let UserId = $(".user-id");
   // id="originMoney"
   let originMoney = $("input#originMoney");
@@ -80,6 +84,35 @@ $(document).ready(() => {
 
     });
   };
+  function amounthandle() {
+    var currentExpense = $(this).attr("data-expenseid")
+    deleteExpense(currentExpense);
+    window.location.reload();
+  }
 
+  function costhandle() {
+    var currentIncome = $(this).attr("data-incomeid")
+    deleteIncome(currentIncome);
+    window.location.reload();
+  }
 
+  function deleteExpense(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/expenses/" + id
+    })
+      .then(function () {
+      });
+  }
+
+  function deleteIncome(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/incomes/" + id
+    })
+      .then(function () {
+      });
+  }
+  deleteExpenseBtn.on("click", costhandle);
+  deleteIncomeBtn.on("click", amounthandle);
 });

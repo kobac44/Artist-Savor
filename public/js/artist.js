@@ -1,35 +1,6 @@
 $(document).ready(() => {
-    // let canvas = document.getElementById('artistChart');
-    // let data = {
-    //     labels: ["Artist Pay", "Artist Cost"],
-    //     datasets: [
-    //         {
-    //             label: "Artist Savor Chart",
-    //             backgroundColor: "rgba(52, 235, 155, 0.2)",
-    //             borderColor: "rgba(52, 235, 155, 1)",
-    //             borderWidth: 3,
-    //             hoverBackGroundColor: "rgba(52, 235, 155, 0.5)",
-    //             hoverBorderColor: "rgba(52, 235, 155, 1)",
-    //             data: [
-    //                 {
-    //                     // data: pay.amount,
-    //                     // data: cost.cost
 
-    //                 }
-    //             ],
-    //         }
-    //     ]
-    // };
-    // let option = {
-    //     animation: {
-    //         duration: 3000
-    //     }
-    // };
-    // let artistChart = Chart.Bar(canvas, {
-    //     data: data,
-    //     options: option
-    // });
-
+    let fullDataSet = [];
 
     var ctx = document.getElementById("pieChart").getContext('2d');
     var pieChart = new Chart(ctx, {
@@ -45,29 +16,21 @@ $(document).ready(() => {
             }]
         }
     });
-    console.log("pie data", pieChart.data);
-    getCost();
-    getPay();
 
-    let incomeData = [];
-    let UserId = data.UserId;
-    let getPay = function () {
 
-        $.get("/api/pays/total/" + UserId).then(data => {
-            for (i = 0; i < data.length; i++) {
-                incomeData.push(data[i].total);
-            };
+    let totalSums = function () {
+        $.get("/api/user_data").then(function (data) {
+            UserId = data.UserId;
+            $.get("/api/pay/total/" + UserId).then(function (secData) {
+                fullDataSet.push(secData[0].amount_total);
+                $.get("/api/cost/total/" + UserId).then(function (treData) {
+                    fullDataSet.push(treData[0].cost_total);
+                    let artistSavorHolding = parseInt(fullDataSet[0] - fullDataSet[1])
+                    $("#artistSavorHolding").text(artistSavorHolding).toFixed(2);
+                    console.log('check data totals', fullDataSet);
+                });
+            });
         });
     };
-
-    let costData = [];
-
-    let getCost = function () {
-
-        $.get("/api/costs/total/" + UserId).then(data => {
-            for (i = 0; i < data.length; i++) {
-                costData.push(data[i].total);
-            };
-        });
-    };
+    totalSums();
 });
