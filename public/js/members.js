@@ -4,19 +4,19 @@ $(document).ready(() => {
 
   let userId;
   let artForms;
-
-  $.get("/api/user_data").then(data => {
-    userId = data.id;
-    artForms = data.artform;
-    $(".member-name").text(data.email);
-    $(".artist-address").text(data.artist_address);
-    $(".art-form").text(artForms);
-    $(".user-id").text(userId);
-
-
-  });
+  function userDat() {
+    $.get("/api/user_data").then(data => {
+      userId = data.id;
+      artForms = data.artform;
+      $(".member-name").text(data.email);
+      $(".artist-address").text(data.artist_address);
+      $(".art-form").text(artForms);
+      $(".user-id").text(userId);
 
 
+    });
+  };
+  userDat();
   let UserId = $(".user-id");
   // id="originMoney"
   let originMoney = $("input#originMoney");
@@ -113,6 +113,10 @@ $(document).ready(() => {
       .then(function () {
       });
   }
+  deleteExpenseBtn = $(".deleteExpense");
+  deleteIncomeBtn = $(".deleteIncome");
+
   deleteExpenseBtn.on("click", costhandle);
   deleteIncomeBtn.on("click", amounthandle);
+
 });
