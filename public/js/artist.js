@@ -6,7 +6,7 @@ $(document).ready(() => {
     var pieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Green", "Blue"],
+            labels: ["Artist Savor", "Artist Cost"],
             datasets: [{
                 backgroundColor: [
                     "#2ecc71",
