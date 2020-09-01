@@ -11,7 +11,7 @@ $(document).ready(() => {
     $(".art-form").text(artForms);
     $(".user-id").text(userId);
 
-    console.log('artform nuckleheadds', artForms);
+
   });
   let UserId = $(".user-id");
   // id="originMoney"
