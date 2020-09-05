@@ -14,7 +14,7 @@ $(document).ready(() => {
       artist_address: addressInput.val().trim(),
       artform: artformInput.val().trim()
     };
-
+    //require the field to be filled during signup
     if (!userData.email || !userData.password || !userData.artist_address || !userData.artform) {
       return;
     }
@@ -34,16 +34,13 @@ $(document).ready(() => {
       password: password,
       artist_address: artist_address,
       artform: artform
-
     })
       .then(() => {
-
         window.location.replace("/login");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
-
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);

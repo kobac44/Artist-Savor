@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- passport auth for user to sign up for an Artist Savor account -->
 
 <head>
   <title>Passport Authentication</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- css local stylesheet and cdn bootstrap css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
   <link href="stylesheets/style.css" rel="stylesheet">
 </head>
+<!-- body of html for sign up includes email, password, address, and art form -->
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Artist Savor</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <span class="navbar-brand" id="navAS">
       <h1>Artist Savor</h1>
     </span>
-  </nav>
+  </nav> -->
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -45,14 +67,14 @@
           </div>
         </form>
         <br />
+        <!-- login button then renders to members page using handlebars -->
         <p>Or log in <a href="/login">here</a></p>
       </div>
     </div>
   </div>
-
+  <!-- jquery and local js for signup.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/signup.js"></script>
-
 </body>
 
 </html>

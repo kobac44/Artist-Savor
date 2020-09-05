@@ -1,18 +1,38 @@
+{{!-- container that renders through main handlebars --}}
 <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Artist Savor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {{!-- Jumbotron container for Heading welcome and acct information  --}}
     <div class="jumbotron jumbotron-fluid col-md-12">
         <div class="container">
             <div class="col-md-12">
                 <h1>Artist Savor</h1>
                 <p>Sock - Away for a rainy day</p>
-
                 <h2>Welcome <span class="member-name"></span></h2>
                 <h3>Account Address: <span class="artist-address"></span></h3>
                 <h4>Type of Art Form: <span class="art-form"></span></h4>
                 <h5>User Account ID: <span class="user-id"></span></h5>
+                {{!-- Buttons to call modals for inserting pay and cost of artist --}}
                 <div class="row" id="gigMoneyBtns">
                     <button type="button" class="btn btn-success btn-lg" id="gigMoneyIn" data-toggle="modal"
-                        data-target="#gigInput"><i class="far fa-dollar-sign" aria-hidden="true"></i>Artist
+                        data-target="#gigInput"><i class="fa fa-dollar-sign" aria-hidden="true"></i>Artist
                         Savor</button>
                     <button type="button" class="btn btn-warning btn-lg" id="gigMoneyOut" data-toggle="modal"
                         data-target="#gigOutput"><i class="fa fa-credit-card" aria-hidden="true"></i>Artist
@@ -23,7 +43,7 @@
     </div>
 
 
-
+    {{!-- row and col for interactive pie chart and total net holdings of the artist savor --}}
     <div class="row">
         <div class="col-md-6">
             <div>
@@ -31,17 +51,18 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div>
+            <div id="artistNet">
                 <h1>Artist Savor Total Net = $<span id="artistTotal"></span></h1>
             </div>
         </div>
     </div>
-    <!-- pay -->
+    <!-- card for revealing each pay transaction by venue type of art performance and total pay for gig-->
     <div class="card">
         <div class="card-header">
             <h2>Artist Savor Holdings</h2>
         </div>
         <div class="card-body">
+            {{!-- table headings --}}
             <table class="table table-striped" id="incomeTable">
                 <thead>
                     <tr>
@@ -52,14 +73,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- pay handlebars -->
+                    <!-- pay handlebars loop for all transaction of this user-->
                     {{#each pay}}
                     <tr>
                         <td> {{this.dataValues.origin}} </td>
                         <td> {{this.dataValues.type}} </td>
                         <td> {{this.dataValues.amount}} </td>
-                        <td> <button type="button" data-incomeid="{{this.dataValues.id}}"
-                                class="deleteIncome btn btn-warning">Remove</button>
+                        <td> <button type="button" data-payid="{{this.dataValues.id}}"
+                                class="deletePay btn btn-warning">Remove</button>
                         </td>
                     </tr>
                     {{/each}}
@@ -69,12 +90,13 @@
     </div>
     <br>
 
-    <!--costs -->
+    <!--card showing costs of artist while on the road expenses incurred -->
     <div class="card">
         <div class="card-header">
             <h2>Artist Cost</h2>
         </div>
         <div class="card-body">
+            {{!-- table headings --}}
             <table class="table table-striped" id="expensesTable">
                 <thead>
                     <tr>
@@ -85,14 +107,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- cost handlebars -->
+                    <!-- cost handlebars loop for all transaction of this user-->
                     {{#each cost}}
                     <tr>
                         <td> {{this.dataValues.origin}} </td>
                         <td> {{this.dataValues.type}} </td>
                         <td> {{this.dataValues.cost}} </td>
-                        <td> <button type="button" data-expenseid="{{this.dataValues.id}}"
-                                class="deleteExpense btn btn-warning">Remove</button>
+                        <td> <button type="button" data-costid="{{this.dataValues.id}}"
+                                class="deleteCost btn btn-warning">Remove</button>
                         </td>
                     </tr>
                     {{/each}}
@@ -118,6 +140,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-body">
+                    {{!-- form group for inserting artist pay and add to db--}}
                     <form id="savorForm">
                         <div class="form-group">
                             <label for="inputLabel">Performance</label>
@@ -153,6 +176,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-body">
+                    {{!-- form group for inserting artist cost and add to db --}}
                     <form id="savorForm">
                         <div class="form-group">
                             <label for="inputLabel">Artist Expense</label>
