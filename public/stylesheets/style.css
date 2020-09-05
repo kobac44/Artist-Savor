@@ -5,19 +5,13 @@ form.login {
 
 
 body {
-  background: rgb(166, 178, 180);
+  background: rgb(168, 221, 230);
   background-size: cover;
   min-height: 680px;
   width: 100%;
   margin: 0px, 0px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 40px;
-  font-weight: 100;
-  font-family: "Arial", "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
 
 .main {
   padding-top: 75px;
@@ -28,6 +22,7 @@ h1 {
 #navAS {
   height: 100px;
 }
+
 p {
   font-size: 20px;
   text-align: center;
@@ -78,37 +73,25 @@ h6 {
   margin-right: auto;
 }
 
-.button {
-  position: absolute;
-  top: 65%;
-}
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  background: rgb(0, 69, 172);
-  color: whitesmoke;
-  text-align: center;
-}
-
-#jumbotron1 {
-  background: transparent;
-  padding: 0px 0px 0px 0px;
-  text-align: center;
-}
 
 #jumbo {
-  border-radius: 1px;
+  background: linear-gradient(to top, #a8dde6 0%, #a2bbd4 59%);
+  border: 2px solid #a8dde6;
+  border-style:ridge;
 }
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
 #pieChart {
   width: 45%;
   margin: 15px auto;
-
-}
-
 }
 
 .center {
@@ -136,9 +119,9 @@ h6 {
   border: 0;
   line-height: 1;
   margin-top: 1.5rem;
-  background-color: #e51e0a;
+  background-color: #ffec0e;
   color: black;
-  border: 2px solid #b91100;
+  border: 2px solid #cdc700;
   border-radius: 15px;
 }
 
@@ -148,10 +131,28 @@ h6 {
   border: 0;
   line-height: 1;
   margin-top: 1.5rem;
-  background-color: #6bcc6e;
+  background-color: #1aee20;
   color: black;
   border: 2px solid #4CAF50;
   border-radius: 15px;
 }
 
+#payBtn {
+  margin-top: 1.5rem;
+  background-color: #1aee20;
+  color: black;
+  border: 2px solid #4CAF50;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
 
+#costBtn {
+  margin-top: 1.5rem;
+  background-color: #ffec0e;
+  color: black;
+  border: 2px solid #cdc700;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
