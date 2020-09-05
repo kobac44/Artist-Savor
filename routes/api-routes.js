@@ -59,6 +59,10 @@ module.exports = function (app) {
     }).then(response => res.json(response))
   });
 
+
+
+
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
@@ -73,6 +77,32 @@ module.exports = function (app) {
         id: req.user.id,
       });
     }
+  });
+
+  app.get("/api/pay/total/:email", function (req, res) {
+    db.User.findAll({
+      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'tot_amt']],
+      where: {
+        email: req.params.email
+      },
+      include: db.Pay
+    }).then(function (sum) {
+      res.json(sum);
+      console.log(sum);
+    });
+  });
+
+  app.get("/api/cost/total/:email", function (req, res) {
+    db.User.findAll({
+      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'tot_amt']],
+      where: {
+        email: req.params.email
+      },
+      include: db.Cost
+    }).then(function (sum) {
+      res.json(sum);
+      console.log(sum);
+    });
   });
 
 
