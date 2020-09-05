@@ -1,46 +1,66 @@
-  ![](https://img.shields.io/badge/License-MIT-yellow.svg)
-  
+ ![](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 # Artist Savor
 
 ## Table of Contents:
 
-* [Description](#description)
-* [Installation](#installation)
-* [Usage](#usage)
-* [License](#license)
-* [Contributing](#contributing)
-* [Tests](#tests)
-* [Questions](#questions)
-
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
 ---
 
-## Description:
-An application to give artists a simple way to store money away for future use. Using Handlebars, Passport, & Plaid Sandbox, the process is made efficient and easy for any user!
+# Description:
+
+An application to give artists/usea a simple way to store money away for future use. This process is made efficient and easy for any user!
+
+---
 
 ## Installation:
-No instructions given
+
+Artist-Savor Install and Dependencies are:
+
+#### Bcrypt.js
+
+#### Chart.js
+
+#### dotenv
+
+#### Express
+
+#### Express-Handlebars
+
+#### MySQL
+
+#### MySQL2
+
+#### Passport
+
+#### Sequelize
 
 ## Usage:
-No usage info given
 
-## License:
+---
 
-
+# License:
 
 MIT License: A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
-    
 
+# Contributing
 
-
-## Contributing 
 No guidelines
-## Tests
+
+# Tests
+
 Nothing described
-## Contact Us
+
+# Contact Us
+
 Github Profiles of Our Team: <https://github.com/danglayers> <br>
 <https://github.com/victorsc45> <br>
 <https://github.com/kobac44> <br>
 Email Addresses of Our Team: <danglayers@gmail.com>
- 
