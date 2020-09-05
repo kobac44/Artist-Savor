@@ -12,12 +12,6 @@ body {
   margin: 0px, 0px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 40px;
-  font-weight: 100;
-  font-family: "Arial", "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
 
 h2 {
   text-align: center;
@@ -59,10 +53,6 @@ h1 {
   margin-right: auto;
 }
 
-.button {
-  position: absolute;
-  top: 65%;
-}
 
 .footer {
   position: fixed;
@@ -90,4 +80,22 @@ h1 {
 #pieChart {
   width: 45%;
   margin: 15px auto;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 85%;
+  left: 45%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50, -50%);
+}
+
+.center1 {
+  margin: 0;
+  position: absolute;
+  top: 85%;
+  left: 45%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50, -50%);
 }
