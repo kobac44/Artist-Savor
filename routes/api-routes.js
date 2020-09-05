@@ -1,7 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
-
+const { Sequelize, Model, DataTypes } = require('sequelize');
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -28,7 +28,7 @@ module.exports = function (app) {
 
     })
       .then(() => {
-        res.redirect(307, "api/login");
+        res.redirect(307, "/api/login");
       })
       .catch(err => {
         res.status(401).json(err);
@@ -46,33 +46,26 @@ module.exports = function (app) {
   //get all 
   app.get("/api/user_data/:id", (req, res) => {
     db.User.findAll({
+      where: {
+        userId: req.params.id
+      },
+
       include: {
+
         model: db.Pay,
         model: db.Cost,
-        where: {
-          userId: req.params.id
-        }
+
       }
     }).then(response => res.json(response))
   });
-  // app.get("/api/user_data", (req, res) => {
-  //   User.findAll((data) => {
-  //     let hdbrsObj = {
-  //       user: data,
-  //       pay: data,
-  //       cost: data
-  //     };
-  //     res.render("index", hdbrsObj);
-  //   });
-  // });
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
-      // The user is not logged in, send back an empty object
+
       res.json({});
     } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
+
       res.json({
         email: req.user.email,
         artist_address: req.user.artist_address,
@@ -81,54 +74,9 @@ module.exports = function (app) {
       });
     }
   });
-  app.get("/api/pay", function (req, res) {
-    db.Pay.findAll({}).then(function (dbPay) {
-      res.json(dbPay);
-      console.log("see this api hit pay", dbPay);
-    });
-  });
-  app.get("/api/cost", function (req, res) {
-    db.Cost.findAll({}).then(function (dbCost) {
-      res.json(dbCost);
-      console.log("see this api hit Cost", dbCost);
-    });
-  });
-  app.get("/api/pays/total/:UserId", function (req, res) {
-    db.User.findAll({
-      include: [Pay.db],
-      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('amount')), 'amount_total']],
-      where: {
-        UserId: req.params.UserId
-      }
-    }).then(function (sum) {
-      res.json(sum);
-      console.log("this is the amount sum silly", sum);
-    });
-  });
 
-  app.get("/api/costs/total/:UserId", function (req, res) {
-    db.User.findAll({
-      include: [Cost.db],
-      attributes: [[db.sequelize.fn('SUM', db.sequelize.col('cost')), 'cost_total']],
-      where: {
-        userId: req.params.UserId
-      }
-    }).then(function (sum) {
-      res.json(sum);
-      console.log('this is cost sum', sum);
-    });
-  });
-  app.get("/api/user/:UserId", function (req, res) {
-    db.User.findAll({
-      where: {
-        UserId: req.params.userId
-      }
-    }).then(function (db) {
-      res.json(db);
-      console.log(db);
-    });
-  });
-  //add amount income
+
+
   app.post("/api/pays/", function (req, res) {
     db.Pay.create({
       origin: req.body.origin,
@@ -136,6 +84,7 @@ module.exports = function (app) {
       amount: req.body.amount,
       UserId: req.body.UserId
     }).then(function (dbPay) {
+
       res.json(dbPay);
     });
   });
@@ -149,7 +98,7 @@ module.exports = function (app) {
       res.json(dbCost);
     });
   });
-  // delete income by id
+
   app.delete("/api/cost/:id", function (req, res) {
     console.log(req.params.id);
     db.User.destroy({
@@ -157,8 +106,8 @@ module.exports = function (app) {
       where: {
         id: req.params.id
       }
-    }).then(function (db) {
-      res.json(db);
+    }).then(function (dbcost) {
+      res.json(dbcost);
     });
   });
   app.delete("/api/pay/:id", function (req, res) {
@@ -168,8 +117,10 @@ module.exports = function (app) {
       where: {
         id: req.params.id
       }
-    }).then(function (db) {
-      res.json(db);
+    }).then(function (dbpay) {
+      res.json(dbpay);
     });
   });
+
+
 };

@@ -50,10 +50,10 @@
                     <!-- pay handlebars -->
                     {{#each pay}}
                     <tr>
-                        <td> {{this.origin}} </td>
-                        <td> {{this.type}} </td>
-                        <td> {{this.amount}} </td>
-                        <td> <button type="button" data-incomeid="{{this.id}}"
+                        <td> {{this.dataValues.origin}} </td>
+                        <td> {{this.dataValues.type}} </td>
+                        <td> {{this.dataValues.amount}} </td>
+                        <td> <button type="button" data-incomeid="{{this.dataValues.id}}"
                                 class="deleteIncome btn btn-warning">Remove</button>
                         </td>
                     </tr>
@@ -83,10 +83,10 @@
                     <!-- cost handlebars -->
                     {{#each cost}}
                     <tr>
-                        <td> {{this.origin}} </td>
-                        <td> {{this.type}} </td>
-                        <td> {{this.cost}} </td>
-                        <td> <button type="button" data-expenseid="{{this.id}}"
+                        <td> {{this.dataValues.origin}} </td>
+                        <td> {{this.dataValues.type}} </td>
+                        <td> {{this.dataValues.cost}} </td>
+                        <td> <button type="button" data-expenseid="{{this.dataValues.id}}"
                                 class="deleteExpense btn btn-warning">Remove</button>
                         </td>
                     </tr>

@@ -1,6 +1,5 @@
 $(document).ready(() => {
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
+
 
   let userId;
   let artForms;
@@ -99,7 +98,7 @@ $(document).ready(() => {
   function deleteExpense(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/expenses/" + id
+      url: "/api/expenses" + id
     })
       .then(function () {
       });
@@ -108,7 +107,7 @@ $(document).ready(() => {
   function deleteIncome(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/incomes/" + id
+      url: "/api/incomes" + id
     })
       .then(function () {
       });
@@ -118,5 +117,8 @@ $(document).ready(() => {
 
   deleteExpenseBtn.on("click", costhandle);
   deleteIncomeBtn.on("click", amounthandle);
+
+
+
 
 });

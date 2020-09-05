@@ -36,15 +36,21 @@ module.exports = function (app) {
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, (req, res) => {
-    db.User.findAll({
-      include: [db.Pay],
-      include: [db.Cost]
+    db.User.findOne({
+      where: {
+        id: req.user.id
+      },
+      include: [db.Pay, db.Cost],
+
+
     }).then((data) => {
+      console.log(data);
       res.render("index", {
 
         user: data,
-        pay: data,
-        cost: data
+        pay: data.Pays,
+        cost: data.Costs
+
       });
     });
   });

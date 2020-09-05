@@ -48,11 +48,10 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Pay, {
             onDelete: "cascade"
         })
-    }
-    User.associate = function (models) {
         User.hasMany(models.Cost, {
             onDelete: "cascade"
         })
     }
+
     return User;
 };
