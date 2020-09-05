@@ -22,15 +22,48 @@ This is especially important given the recent climate of social distancing today
 
 The Artist Savor will help the artist save their Artform and protect and sustain their everyday life.
 
-The ##APP
+The Artitst Savor-App.
 
 - Sign-up or Sign In with your Email and password
 
-- Sign-up requires an email and password, choose a bank that fits clients artform/life style, become a member, deposit no lower than $50, must fulfill $500 deposit within 364 days of membership. Penalties are assessed for early withdrawl and day 365 of initial payment.
+- Sign-up requires an email and password, provides banking options that fit the clients artform/life style, become a member, deposit no lower than $50, must fulfill $500 deposit within 364 days of membership. Penalties are assessed for early withdrawl and/or day 365 of initial payment.
 
 - Sign-in requires a email and password, going directly to members account and account options.
 
-Options to pay into health-insurance, self-insurance (when unable to work), and life insurance
+Options to pay into health-insurance, self-insurance (when unable to work), and life insurance.
+
+The User:
+
+- able to sign-up with their email and they're password choice.
+
+- Choose a bank provided by the app.
+
+- Can deposit a minimum of \$50 on inital membership
+  start
+
+- have 2yrs before withdrawing the first \$500
+
+- Can choose insurance options
+
+- Can decide auto deposit or manual.
+
+- can choose widget features on or for their mobile app
+
+- has 364 days to deposit \$500 before incurring a penalty
+
+Members:
+
+- sign-in with email and password
+
+- sent directly to their acounts and transaction
+
+- required to deposit \$500 a year
+
+- Can choose insurance options
+
+- have 2yrs before withdrawing the first \$500
+
+- can choose widget features on or for their mobile app
 
 ---
 
@@ -73,7 +106,7 @@ MIT License: A short and simple permissive license with conditions only requirin
 
 # Tests
 
-Nothing described
+Tests were required to maintain app functionality and quality assurance.
 
 # Contact Us
 
