@@ -14,12 +14,19 @@ body {
 }
 
 .navbar-brand {
+  font-style: "montserrat", "san serif";
   font-size: 40px;
+  color: #000;
+}
+
+li a {
+  color: black;
 }
 
 ul.navbar-nav.mr-auto {
   padding: 16px;
   list-style: none;
+  font-size: 18px;
 }
 
 li.nav-item.active {
@@ -101,16 +108,25 @@ h6 {
   border-style: ridge;
 }
 
+/* login/sign-up page container */
 .container {
   position: relative;
   overflow: hidden;
+  margin-left: center;
 }
+
+/* specific div center look */
+/* div.center {
+  margin-left: -140px;
+  bottom: -5;
+} */
 
 #pieChart {
   width: 45%;
   margin: 15px auto;
 }
 
+/* part of the div-center */
 .center {
   margin: 0;
   position: absolute;
