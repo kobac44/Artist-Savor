@@ -1,136 +1,171 @@
 {{!-- container that renders through main handlebars --}}
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Artist Savor</a>
-        {{!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+
+<nav class="navbar navbar-expand-lg navbar-dark py-0 custom-navbar" id="no-padd">
+    <div class="container-fluid" id="no-padd">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <a id="logo" class="navbar-brand" href="#">Artist Savor</a>
+        <button class="navbar-toggler" data-toggle="collapse" aria="hidden" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> --}}
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./views/index-account.handlebars">My Account <span
-                            class="sr-only">(current)</span></a>
+        </button>
+        <!-- Collects the nav links, forms, and content for toggling -->
+        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item active"><a class="nav-link custom-nav-link" href="about.html">About Us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link1" href="about.html">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link2" href="/logout">Log Out</a>
-                </li>
+                <li class="nav-item active"><a class="nav-link custom-nav-link" href="/logout">Log Out</a>
             </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+{{!-- Jumbotron container for Heading welcome and acct information  --}}
+<div class="jumbotron-fluid">
+    <div class="container">
+        {{!-- <div class="col-md-12"> --}}
+        <h1>Artist Savor</h1>
+        <p>Sock - Away for a rainy day</p>
+        <h2>Welcome <span class="member-name"></span></h2>
+        <h3>Account Address: <span class="artist-address"></span></h3>
+        <h4>Type of Art Form: <span class="art-form"></span></h4>
+        <h5>User Account ID: <span class="user-id"></span></h5>
+        {{!-- Buttons to call modals for inserting pay and cost of artist --}}
+        <div class="row" id="savorCostRow">
+            <button type="button" class="btn btn-success btn-lg" id="gigMoneyIn" data-toggle="modal"
+                data-target="#gigInput"><i class="fa fa-dollar-sign" aria-hidden="true"></i>Artist
+                Savor</button>
+            <button type="button" class="btn btn-warning btn-lg" id="gigMoneyOut" data-toggle="modal"
+                data-target="#gigOutput"><i class="fa fa-credit-card" aria-hidden="true"></i>Artist
+                Cost</button>
         </div>
-    </nav>
-    
-    {{!-- Jumbotron container for Heading welcome and acct information  --}}
-    <div class="jumbotron jumbotron-fluid col-md-12">
-        <div class="container">
-            <div class="col-md-12">
-                <h1>Artist Savor</h1>
-                <p>Sock - Away for a rainy day</p>
-                <h2>Welcome <span class="member-name"></span></h2>
-                <h3>Account Address: <span class="artist-address"></span></h3>
-                <h4>Type of Art Form: <span class="art-form"></span></h4>
-                <h5>User Account ID: <span class="user-id"></span></h5>
-                {{!-- Buttons to call modals for inserting pay and cost of artist --}}
-                <div class="row" id="gigMoneyBtns">
-                    <button type="button" class="btn btn-success btn-lg" id="gigMoneyIn" data-toggle="modal"
-                        data-target="#gigInput"><i class="fa fa-dollar-sign" aria-hidden="true"></i>Artist
-                        Savor</button>
-                    <button type="button" class="btn btn-warning btn-lg" id="gigMoneyOut" data-toggle="modal"
-                        data-target="#gigOutput"><i class="fa fa-credit-card" aria-hidden="true"></i>Artist
-                        Cost</button>
-                </div>
-            </div>
-        </div>
+        {{!-- </div> --}}
     </div>
+</div>
 
 
-    {{!-- row and col for interactive pie chart and total net holdings of the artist savor --}}
-    <div class="row">
-        <div class="col-md-6">
-            <div>
-                <canvas id="pieChart"></canvas>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div id="artistNet">
-                <h1>Artist Savor Total Net = $<span id="artistTotal"></span></h1>
-            </div>
+{{!-- row and col for interactive pie chart and total net holdings of the artist savor --}}
+<div class="row spaceRow">
+    <div class="col-sm-4 pie">
+        <div>
+            <canvas id="pieChart"></canvas>
         </div>
     </div>
-    <!-- card for revealing each pay transaction by venue type of art performance and total pay for gig-->
-    <div class="card">
-        <div class="card-header">
-            <h2>Artist Savor Holdings</h2>
-        </div>
-        <div class="card-body">
-            {{!-- table headings --}}
-            <table class="table table-striped" id="incomeTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Venue</th>
-                        <th scope="col">Type of Performance</th>
-                        <th scope="col">Pay</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- pay handlebars loop for all transaction of this user-->
-                    {{#each pay}}
-                    <tr>
-                        <td> {{this.dataValues.origin}} </td>
-                        <td> {{this.dataValues.type}} </td>
-                        <td> {{this.dataValues.amount}} </td>
-                        <td> <button type="button" data-payid="{{this.dataValues.id}}"
-                                class="deletePay btn btn-warning">Remove</button>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+    <div class="col-sm-2 net">
+        <div id="artistNet">
+            <h1>Artist Savor </br>Total = $<span id="artistTotal"></span></h1>
         </div>
     </div>
-    <br>
+    <div class="col-sm-2 pop">
+        <header id="labels">View Market Prices:</header>
+        <div id="dow">
+            <button type="button" class="btn btn-secondary" data-trigger="focus" data-container="body"
+                data-toggle="DOWpopover" data-placement="left">
+                Dow Jones Industrial Average
+            </button>
+        </div>
 
-    <!--card showing costs of artist while on the road expenses incurred -->
-    <div class="card">
-        <div class="card-header">
-            <h2>Artist Cost</h2>
+
+        <div id="nas">
+            <button type="button" class="btn btn-secondary" data-trigger="focus" data-container="body"
+                data-toggle="NASpopover" data-placement="left">
+                NASDAQ Composite
+            </button>
         </div>
-        <div class="card-body">
-            {{!-- table headings --}}
-            <table class="table table-striped" id="expensesTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Name the Payee</th>
-                        <th scope="col">Debit For</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- cost handlebars loop for all transaction of this user-->
-                    {{#each cost}}
-                    <tr>
-                        <td> {{this.dataValues.origin}} </td>
-                        <td> {{this.dataValues.type}} </td>
-                        <td> {{this.dataValues.cost}} </td>
-                        <td> <button type="button" data-costid="{{this.dataValues.id}}"
-                                class="deleteCost btn btn-warning">Remove</button>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+
+
+        <div id="snp">
+            <button type="button" class="btn btn-secondary" data-trigger="focus" data-container="body"
+                data-toggle="SNPpopover" data-placement="left">
+                S&amp;P 500 Index
+            </button>
         </div>
+    </div>
+    <div class="col-sm-2">
+        <form class="qoute">
+
+            <label id="labels" for="formGroupExampleInput">Stock Quotes by Symbol</label><br>
+            <input type="text" class="form-control" id="symbol" placeholder="AAPL, GOOGL etc..."><br>
+            <button type="submit" class="btn btn-primary btn-lg" id="symbolBtn">Submit Stock Symbol</button><br>
+            <label id="labels" for="formGroupExampleInput2">Quote</label><br>
+            <input type="text" class="form-control" id="quote">
+            <button type="button" id="clearBtn" class="btn btn-info">
+                Clear
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<!-- card for revealing each pay transaction by venue type of art performance and total pay for gig-->
+<div class="card">
+    <div class="card-header">
+        <h2>Artist Savor Paid In</h2>
+    </div>
+    <div class="card-body">
+        {{!-- table headings --}}
+        <table class="table table-striped" id="incomeTable">
+            <thead>
+                <tr>
+                    <th scope="col">Venue</th>
+                    <th scope="col">Type of Performance</th>
+                    <th scope="col">Pay</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- pay handlebars loop for all transaction of this user-->
+                {{#each pay}}
+                <tr>
+                    <td> {{this.dataValues.origin}} </td>
+                    <td> {{this.dataValues.type}} </td>
+                    <td> {{this.dataValues.amount}} </td>
+                    <td> <button type="button" data-payid="{{this.dataValues.id}}"
+                            class="deletePay btn btn-warning">Remove</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+
+<!--card showing costs of artist while on the road expenses incurred -->
+<div class="card">
+    <div class="card-header">
+        <h2>Artist Savor Cost</h2>
+    </div>
+    <div class="card-body">
+        {{!-- table headings --}}
+        <table class="table table-striped" id="expensesTable">
+            <thead>
+                <tr>
+                    <th scope="col">Name the Payee</th>
+                    <th scope="col">Debit For</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- cost handlebars loop for all transaction of this user-->
+                {{#each cost}}
+                <tr>
+                    <td> {{this.dataValues.origin}} </td>
+                    <td> {{this.dataValues.type}} </td>
+                    <td> {{this.dataValues.cost}} </td>
+                    <td> <button type="button" data-costid="{{this.dataValues.id}}"
+                            class="deleteCost btn btn-warning">Remove</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
 </div>
 
 
 
-</div>
+
 
 {{!-- artist input money modal --}}
 <div class="modal" id="gigInput" tabindex="-1" role="dialog" aria-labelledby="gigInput" aria-hidden="true">
